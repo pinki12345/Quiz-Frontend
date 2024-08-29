@@ -3,10 +3,9 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./QuizInterface.module.css";
 import Loader from "./Loader";
-import { toast } from 'react-hot-toast';
-import { useDispatch,useSelector} from 'react-redux';
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../actions";
-
 
 const QuizInterface = () => {
   const dispatch = useDispatch();
@@ -31,7 +30,7 @@ const QuizInterface = () => {
         toast.error("Failed to increment impression", {
           position: "top-right",
         });
-      }finally {
+      } finally {
         dispatch(setLoading(false));
       }
     };
@@ -59,7 +58,7 @@ const QuizInterface = () => {
         toast.error("Failed to fetch quiz", {
           position: "top-right",
         });
-      }finally {
+      } finally {
         dispatch(setLoading(false));
       }
     };
@@ -97,32 +96,71 @@ const QuizInterface = () => {
     }
   }, [currentQuestionIndex, quiz]);
 
+  // const handleOptionClick = (optionIndex) => {
+  //   if (quiz) {
+  //     setSelectedOption(optionIndex);
+  //     const currentQuestionId = quiz.questions[currentQuestionIndex]._id;
+
+  //     if (quiz.quizType === "Q&A") {
+  //       const isCorrect =
+  //         quiz.questions[currentQuestionIndex].options[optionIndex].isCorrect;
+  //       const updatedResponses = [...responses];
+  //       updatedResponses[currentQuestionIndex] = {
+  //         questionId: currentQuestionId,
+  //         isCorrect: isCorrect,
+  //       };
+  //       setResponses(updatedResponses);
+  //     } else if (quiz.quizType === "Poll") {
+  //       const selectedOptionId =
+  //         quiz.questions[currentQuestionIndex].options[optionIndex]._id;
+  //       const updatedResponses = [...responses];
+  //       updatedResponses[currentQuestionIndex] = {
+  //         questionId: currentQuestionId,
+  //         selectedOptionId: selectedOptionId,
+  //       };
+  //       setResponses(updatedResponses);
+  //     }
+  //   }
+  // };
+
   const handleOptionClick = (optionIndex) => {
     if (quiz) {
-      setSelectedOption(optionIndex);
+      // Determine the current question ID
       const currentQuestionId = quiz.questions[currentQuestionIndex]._id;
-
-      if (quiz.quizType === "Q&A") {
-        const isCorrect =
-          quiz.questions[currentQuestionIndex].options[optionIndex].isCorrect;
-        const updatedResponses = [...responses];
-        updatedResponses[currentQuestionIndex] = {
-          questionId: currentQuestionId,
-          isCorrect: isCorrect,
-        };
+      
+      // Check if the clicked option is already selected
+      if (selectedOption === optionIndex) {
+        // If the same option is clicked, unselect it
+        setSelectedOption(null);
+  
+        // Remove the response for this question
+        const updatedResponses = responses.filter(response => response.questionId !== currentQuestionId);
         setResponses(updatedResponses);
-      } else if (quiz.quizType === "Poll") {
-        const selectedOptionId =
-          quiz.questions[currentQuestionIndex].options[optionIndex]._id;
+      } else {
+        // Select the new option
+        setSelectedOption(optionIndex);
+  
         const updatedResponses = [...responses];
-        updatedResponses[currentQuestionIndex] = {
-          questionId: currentQuestionId,
-          selectedOptionId: selectedOptionId,
-        };
+        if (quiz.quizType === "Q&A") {
+          const isCorrect =
+            quiz.questions[currentQuestionIndex].options[optionIndex].isCorrect;
+          updatedResponses[currentQuestionIndex] = {
+            questionId: currentQuestionId,
+            isCorrect: isCorrect,
+          };
+        } else if (quiz.quizType === "Poll") {
+          const selectedOptionId =
+            quiz.questions[currentQuestionIndex].options[optionIndex]._id;
+          updatedResponses[currentQuestionIndex] = {
+            questionId: currentQuestionId,
+            selectedOptionId: selectedOptionId,
+          };
+        }
         setResponses(updatedResponses);
       }
     }
   };
+  
 
   useEffect(() => {
     if (quiz) {
@@ -197,14 +235,11 @@ const QuizInterface = () => {
     } else {
       updatedResponses[currentQuestionIndex] = null;
     }
-
     setResponses(updatedResponses);
-
     if (currentQuestionIndex < quiz.questions.length - 1) {
       const nextQuestionIndex = currentQuestionIndex + 1;
       setCurrentQuestionIndex(nextQuestionIndex);
       setSelectedOption(null);
-
       if (quiz.quizType === "Q&A") {
         const newTimeLimit = quiz.questions[nextQuestionIndex].timeLimit || 0;
         setTimeLeft(newTimeLimit);
@@ -217,7 +252,7 @@ const QuizInterface = () => {
   };
 
   const handleSubmitQuiz = async () => {
-    const toastId = toast.loading("Submitting quiz..."); 
+    const toastId = toast.loading("Submitting quiz...");
     dispatch(setLoading(true));
     try {
       const responsePayload = {
@@ -257,11 +292,11 @@ const QuizInterface = () => {
   };
 
   if (isLoading) return <Loader />;
-  // if (error) return <div>{error}</div>;
   if (!quiz || !quiz.questions || quiz.questions.length === 0) {
     return <div>No questions available.</div>;
   }
   const currentQuestion = quiz.questions[currentQuestionIndex];
+
   return (
     <div className={styles.quizContainerbody}>
       <div className={styles.quizContainer}>

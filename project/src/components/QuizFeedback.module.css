@@ -14,6 +14,7 @@
   border-radius: 10px;
   width: 50vw;
   height: 50vh;
+  min-width: 300px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -33,6 +34,7 @@
 .quizCup {
   width: 15vw;
   height: 30vh;
+  min-width: 200px;
 }
 .quizResult {
   font-weight: 700;
