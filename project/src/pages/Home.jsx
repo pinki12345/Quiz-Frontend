@@ -1,34 +1,3 @@
-// import React, { useState } from "react";
-// import Sidebar from "../components/Sidebar";
-// import Dashboard from "../components/Dashboard";
-// import QuizAnalysis from "../components/QuizAnalysis";
-// import styles from "./Home.module.css"; // Import CSS Module
-// import { Outlet } from "react-router-dom";
-
-// const Home = () => {
-//   const [activeComponent, setActiveComponent] = useState("dashboard");
-//   const [quizAnalysis, setQuizAnalysis] = useState(true);
-
-//   const handleSidebarClick = (component) => {
-//     setActiveComponent(component);
-//   };
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={styles.sidebarData}>
-//         <Sidebar onSidebarClick={handleSidebarClick} />
-//       </div>
-//       <div className={styles.mainContent}>
-//         {activeComponent === "dashboard" && <Dashboard />}
-//         {activeComponent === "analytics" && <QuizAnalysis />}
-//       </div>
-
-//     </div>
-//   );
-// };
-
-// export default Home;
-
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import Dashboard from "../components/Dashboard";
@@ -42,12 +11,12 @@ const Home = () => {
 
   const handleSidebarClick = (component) => {
     setActiveComponent(component);
-    setShowQuizQuestionAnalysis(false); // Reset to ensure the default components are shown
+    setShowQuizQuestionAnalysis(false); 
   };
 
   const handleShowQuizQuestionAnalysis = () => {
     setShowQuizQuestionAnalysis(true);
-    setActiveComponent(null); // Hide the other components
+    setActiveComponent(null); 
   };
 
   return (

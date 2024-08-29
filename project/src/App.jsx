@@ -53,7 +53,7 @@ function App() {
         </Route> */}
 
         <Route
-          path="/home"
+          path="/home/*"
           element={
             <PrivateRoute>
               <Home />
