@@ -88,10 +88,6 @@ const QuizAnalysis = () => {
     setIsEditModalOpen(true);
   };
 
-  // const handleNext = (quizLink) => {
-  //   setQuizLink(quizLink);
-  //   setModalStepforUpdate(5);
-  // };
 
   return (
     <>

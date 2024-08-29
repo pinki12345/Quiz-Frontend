@@ -4,13 +4,13 @@
   padding: 20px;
   height: 100%;
   font-family: "Poppins", sans-serif;
-  /* background-color: #ededed; */
+  background-color: #EDEDED;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   position: relative;
-  background-color: #ff6700;
+  /* background-color: #ff6700; */
 }
 
 .heading {

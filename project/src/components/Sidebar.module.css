@@ -41,7 +41,7 @@
   margin: 0;
   width: 100%;
 }
-.navbar li {
+/* .navbar li {
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-weight: 600;
@@ -57,6 +57,29 @@
   background-color: #f4f4f4;
   border-radius: 5px;
   padding: 10px;
+} */
+
+.navbar li {
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  cursor: pointer;
+  text-align:center;
+  padding: 5px 0;
+  box-sizing: border-box; 
+  width: 12vw;
+  min-width: 150px;
+  transition: background-color 0.3s;
+}
+
+.navbar li.active {
+  /* background-color:white;  */
+  border-radius: 10px;
+  /* border: 1px solid black; */
+  text-align: center;
+  background-color: #ffffff;
+  box-shadow:  0 0 8px rgba(0, 0, 0, 0.2); 
 }
 .logout {
   text-align: center;
