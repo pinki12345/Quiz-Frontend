@@ -1,0 +1,44 @@
+.quizContainerbody {
+  width: 100vw;
+  height: 100vh;
+  background-color: #041325;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+}
+
+.quizContainer {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  width: 50vw;
+  height: 50vh;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quizHeader {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+  font-size: 25px;
+  color: #474444;
+  text-align: center;
+}
+
+.quizCup {
+  width: 15vw;
+  height: 30vh;
+}
+.quizResult {
+  font-weight: 700;
+  font-size: 25px;
+  color: #474444;
+}
+.quizScore{
+    color: #60B84B;
+}

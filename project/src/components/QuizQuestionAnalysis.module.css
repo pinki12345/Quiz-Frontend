@@ -1,0 +1,41 @@
+.container {
+    height: 100vh;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #EDEDED;
+  }
+  
+  .heading {
+    color: #4a6df5;
+  }
+  
+  .metadata {
+    text-align: right;
+    color: #ff5400;
+    font-size: 12px;
+  }
+  
+  .questionBlock {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .statsContainer {
+    display: flex;
+    justify-content: space-around;
+    gap:2vw;
+  }
+  
+  .statBox {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+  }
+  
+  .number {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

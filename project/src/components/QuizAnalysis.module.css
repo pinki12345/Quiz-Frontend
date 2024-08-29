@@ -1,0 +1,109 @@
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background-color: #ededed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 75px;
+  color: #5076ff;
+  margin-top: -2.5vh;
+  padding-bottom: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ededed;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-top: 4vh;
+}
+
+.leftBottom {
+  border-bottom-left-radius: 15px !important;
+}
+.rightBottom {
+  border-bottom-right-radius: 15px !important;
+}
+.table th,
+.table td {
+  padding: 14px;
+  text-align: Center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+}
+
+.table th {
+  background-color: #5076ff;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.table tr {
+  border-bottom: 1px solid #ddd;
+  border: none;
+}
+
+.table tr:nth-child(even) {
+  background-color: #b3c4ff;
+  border-top-left-radius: 15px;
+  border: none;
+}
+
+.table td a {
+  color: #4a5ec5;
+  text-decoration: none;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.iconEdit {
+  color: #ffc107;
+  cursor: pointer;
+}
+
+.iconDelete {
+  color: #f44336;
+  cursor: pointer;
+}
+
+.iconShare {
+  color: #4caf50;
+  cursor: pointer;
+}
+
+.moreQuizzes {
+  font-size: 0.9rem;
+  color: #888;
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+}
+
+.table tr td:first-child {
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+.table tr td:last-child {
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
