@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { formatDate } from "../utils/dateUtils";
 import Loader from "./Loader";
 import { toast } from "react-hot-toast";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { setLoading } from "../actions";
 
 const QuizQuestionAnalysis = () => {
@@ -13,7 +13,7 @@ const QuizQuestionAnalysis = () => {
   const { quizId } = useParams();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  console.log("Quiz Question Analysis Id: " + quizId);
+
   useEffect(() => {
     const fetchQuizData = async () => {
       const toastId = toast.loading("Fetching quiz data...");
@@ -27,7 +27,7 @@ const QuizQuestionAnalysis = () => {
         setError("Failed to fetch quiz data");
         toast.error("Failed to fetch quiz data");
         console.error("Error fetching quiz data:", err);
-      }finally {
+      } finally {
         toast.dismiss(toastId);
         dispatch(setLoading(false));
       }
@@ -36,20 +36,25 @@ const QuizQuestionAnalysis = () => {
   }, [quizId]);
 
   if (!data) {
-    return <Loader/>;
+    return <Loader />;
   }
 
+  console.log("Data____________________________________", data);
   return (
     <div className={styles.container}>
-      <h2 className={styles.heading}>
-        {data.quizType === "Poll" ? "Poll Analysis" : "Quiz Analysis"}
-      </h2>
-      <div className={styles.metadata}>
-        <div>
-          Created on:{" "}
-          {data.createdAt ? formatDate(data.createdAt) : "Loading..."}
+      <div className={styles.headerContainer}>
+        <h2 className={styles.heading}>
+          {data.quizType === "Poll"
+            ? "Poll Analysis"
+            : "Quiz Question Analysis"}
+        </h2>
+        <div className={styles.metadata}>
+          <div>
+            Created on:{" "}
+            {data.createdAt ? formatDate(data.createdAt) : "Loading..."}
+          </div>
+          <div>Impressions: {data.impressions || "N/A"}</div>
         </div>
-        <div>Impressions: {data.impressions || "Loading..."}</div>
       </div>
       {error && <div className={styles.error}>{error}</div>}
       {data.quizType === "Poll" ? (
@@ -57,12 +62,15 @@ const QuizQuestionAnalysis = () => {
           {data.questions && data.questions.length > 0 ? (
             data.questions.map((question, index) => (
               <div key={index} className={styles.questionBlock}>
-                <h3>{question.questionText}</h3>
+                <h3>Q.{index+1}{" "}{question.questionText}</h3>
                 <div className={styles.statsContainer}>
                   {question.options.map((option, index) => (
-                    <div className={styles.statBox}>
-                      <div className={styles.number}>
-                        {option.votes} option{index + 1}
+                    <div className={styles.statBox} key={index}>
+                      <div className={styles.optionVotes}>
+                        {option.votes}
+                      </div>
+                      <div className={styles.optionText}>
+                        Option {index + 1}
                       </div>
                     </div>
                   ))}
@@ -78,7 +86,7 @@ const QuizQuestionAnalysis = () => {
           {data.questions && data.questions.length > 0 ? (
             data.questions.map((question, index) => (
               <div key={index} className={styles.questionBlock}>
-                <h3>{question.questionText}</h3>
+                <h3>Q.{index+1}{" "}{question.questionText}</h3>
                 <div className={styles.statsContainer}>
                   <div className={styles.statBox}>
                     <div className={styles.number}>{question.attempts}</div>

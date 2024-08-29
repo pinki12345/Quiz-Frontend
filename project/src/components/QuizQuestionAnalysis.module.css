@@ -1,41 +1,74 @@
 .container {
-    height: 100vh;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    background-color: #EDEDED;
-  }
-  
-  .heading {
-    color: #4a6df5;
-  }
-  
-  .metadata {
-    text-align: right;
-    color: #ff5400;
-    font-size: 12px;
-  }
-  
-  .questionBlock {
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ccc;
-  }
-  
-  .statsContainer {
-    display: flex;
-    justify-content: space-around;
-    gap:2vw;
-  }
-  
-  .statBox {
-    background-color: #f7f7f7;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    width: 30%;
-  }
-  
-  .number {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
+  height: 100vh;
+  padding: 40px;
+  font-family: Arial, sans-serif;
+  background-color: #ededed;
+  min-width: 650px;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.heading {
+  color: #4a6df5;
+  font-weight: 600;
+  font-size: 40px;
+}
+
+.metadata {
+  text-align: right;
+  color: #ff5400;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.questionBlock {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 20px;
+}
+
+.questionBlock h3 {
+  margin-bottom: 15px;
+}
+
+.statsContainer {
+  display: flex;
+  justify-content: space-around;
+  gap: 2vw;
+}
+
+.statBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f7f7f7;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  gap: 10px;
+  width: 30%;
+}
+
+.number {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.optionVotes {
+  font-size: 30px; /* Increase font size for votes */
+  font-weight: 700; /* Make font weight bolder */
+  color: #333; /* Adjust color if needed */
+}
+
+.optionText {
+  font-size: 18px; /* Font size for option text */
+}
+
+.optionNumber {
+  font-size: 16px; /* Font size for option number */
+}

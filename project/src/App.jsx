@@ -63,9 +63,7 @@ function App() {
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="analytics" element={<QuizAnalysis />} />
           <Route path="quizQuestionAnalysis/:quizId" element={<QuizQuestionAnalysis />} />
-          
         </Route>
-       
         <Route path="/quizInterface/:id" element={<QuizInterface />} />
         <Route path="/feedback" element={<QuizFeedback />} />
         <Route path="/pollFeedback" element={<PollFeedback />} />

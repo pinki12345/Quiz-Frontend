@@ -211,15 +211,15 @@
 }
 
 .quizList::-webkit-scrollbar-thumb {
-  background-color: #c5c5c5; 
+  background-color: #e0e0e0; 
   border-radius: 6px; 
 }
 
 .quizList::-webkit-scrollbar-thumb:hover {
-  background-color: #555; 
+  background-color: #a4a1a1; 
 }
 
 .quizList::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+ background: #EDEDED;; ; 
   border-radius: 6px; 
 }

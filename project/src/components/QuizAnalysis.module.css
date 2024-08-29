@@ -10,7 +10,7 @@
   justify-content: center;
   flex-direction: column;
   position: relative;
-  max-width: 1200px;
+  min-width: 650px;
 }
 
 .heading {
@@ -19,8 +19,8 @@
   font-weight: 600;
   line-height: 75px;
   color: #5076ff;
-  margin-top: -2.5vh;
- padding-bottom: 10px;
+  margin-top: -5.5vh;
+ padding-bottom: 20px;
 }
 .tableContainer {
   width: 100%;
@@ -29,6 +29,7 @@
   overflow-y: auto; 
   border-radius: 15px; 
   min-width: 450px;
+  padding-right: 20px; 
 }
 
 .table {
@@ -103,8 +104,8 @@
   font-size: 0.9rem;
   color: #888;
   position: absolute;
-  bottom: 60px;
-  right: 30px;
+  bottom: 8vh;
+  right: 4vw;
 }
 
 .tableContainer tr td:first-child {
@@ -122,15 +123,17 @@
 }
 
 .tableContainer::-webkit-scrollbar-thumb {
-  background-color: #c5c5c5; 
+  background-color: #e0e0e0; 
   border-radius: 6px; 
 }
 
 .tableContainer::-webkit-scrollbar-thumb:hover {
-  background-color: #555; 
+  background-color: #a4a1a1; 
 }
 
 .tableContainer::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  background: #EDEDED;; 
   border-radius: 6px; 
+  margin-top: 10px; 
+  margin-bottom: 10px;
 }

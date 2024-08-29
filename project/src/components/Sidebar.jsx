@@ -3,7 +3,7 @@
 // import QuizModal from "./modal/QuizModal";
 // import { toast } from "react-hot-toast";
 // import QuizLinkShareModal from "./modal/QuizLinkShareModal";
-// import { useNavigate } from "react-router-dom";
+// import { useNavigate,Link,Outlet} from "react-router-dom";
 // import QuizOrPollType from "./modal/QuizOrPollType";
 
 // const Sidebar = ({ onSidebarClick }) => {
@@ -53,18 +53,18 @@
 //         <div className={styles.logo}>QUIZZIE</div>
 //         <nav className={styles.navbar}>
 //           <ul>
-//             {/* <li>
+//             <li>
 //               <Link to="/home/dashboard" className={styles.active}>
 //                 Dashboard
 //               </Link>
 //             </li>
 //             <li>
 //               <Link to="/home/quizAnalysis">Analytics</Link>
-//             </li> */}
+//             </li>
 
-//             <li onClick={() => onSidebarClick("dashboard")} className={activeItem === "dashboard" ? styles.active : ""}>Dashboard</li>
+//             {/* <li onClick={() => onSidebarClick("dashboard")} className={activeItem === "dashboard" ? styles.active : ""}>Dashboard</li>
 //             <li onClick={() => onSidebarClick("analytics")}  className={activeItem === "analytics" ? styles.active : ""}>Analytics</li>
-//             <li onClick={handleCreateQuizClick} className={activeItem === "createQuiz" ? styles.active : ""}>Create Quiz</li>
+//             <li onClick={handleCreateQuizClick} className={activeItem === "createQuiz" ? styles.active : ""}>Create Quiz</li> */}
 //           </ul>
 //         </nav>
 //         <div className={styles.logout}>
@@ -72,9 +72,9 @@
 //           <p onClick={handleLogout}>LOGOUT</p>
 //         </div>
 //       </div>
-//       {/* <div className={styles.content}>
+//       <div className={styles.content}>
 //         <Outlet />
-//       </div> */}
+//       </div>
 //       {modalStep === 1 && (
 //         <QuizModal
 //           onClose={handleCloseModal}

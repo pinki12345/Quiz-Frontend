@@ -5,14 +5,14 @@ import icon1 from "../assets/material-symbols_delete.png";
 import icon2 from "../assets/material-symbols_share.png";
 import icon3 from "../assets/uil_edit.png";
 import DeleteModal from "./modal/DeleteModal";
-import { Link } from "react-router-dom";
+import { Link,useOutletContext } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllQuizzes, removeQuiz, setLoading } from "../actions";
 import QuizOrPollType from "./modal/QuizOrPollType";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
 
-const QuizAnalysis = ({ onQuestionWiseAnalysisClick }) => {
+const QuizAnalysis = () => {
   const dispatch = useDispatch();
   const quizzes = useSelector((state) => state.allQuizzes);
   const isLoading = useSelector((state) => state.isLoading);
@@ -21,7 +21,7 @@ const QuizAnalysis = ({ onQuestionWiseAnalysisClick }) => {
   const [quizToDelete, setQuizToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [quizToEdit, setQuizToEdit] = useState(null);
-
+  const { onQuestionWiseAnalysisClick } = useOutletContext();
 
   useEffect(() => {
     dispatch(fetchAllQuizzes());
@@ -134,7 +134,10 @@ const QuizAnalysis = ({ onQuestionWiseAnalysisClick }) => {
                   />
                 </td>
                 <td>
-                  <Link to={`quizQuestionAnalysis/${quiz._id}`} onClick={onQuestionWiseAnalysisClick}>
+                  <Link to={`quizQuestionAnalysis/${quiz._id}`} onClick={(e) => {
+                        e.preventDefault();
+                        onQuestionWiseAnalysisClick(quiz._id);
+                      }}>
                     Question Wise Analysis
                   </Link>
                 </td>
