@@ -519,6 +519,7 @@ const QuizOrPollType = ({
                   type="radio"
                   value="text"
                   checked={currentQuestion.optionType === "text"}
+                  className={styles.customRadio}
                   disabled
                 />
                 Text
@@ -528,6 +529,7 @@ const QuizOrPollType = ({
                   type="radio"
                   value="imageURL"
                   checked={currentQuestion.optionType === "imageURL"}
+                  className={styles.customRadio}
                   disabled
                 />
                 Image URL
@@ -537,6 +539,7 @@ const QuizOrPollType = ({
                   type="radio"
                   value="textImageURL"
                   checked={currentQuestion.optionType === "textImageURL"}
+                  className={styles.customRadio}
                   disabled
                 />
                 Text & Image URL
@@ -550,6 +553,7 @@ const QuizOrPollType = ({
                   value="text"
                   checked={currentQuestion.optionType === "text"}
                   onChange={handleOptionTypeChange}
+                  className={styles.customRadio}
                 />
                 Text
               </label>
@@ -558,7 +562,7 @@ const QuizOrPollType = ({
                   type="radio"
                   value="imageURL"
                   checked={currentQuestion.optionType === "imageURL"}
-                  onChange={handleOptionTypeChange}
+                  onChange={handleOptionTypeChange} className={styles.customRadio}
                 />
                 Image URL
               </label>
@@ -567,7 +571,7 @@ const QuizOrPollType = ({
                   type="radio"
                   value="textImageURL"
                   checked={currentQuestion.optionType === "textImageURL"}
-                  onChange={handleOptionTypeChange}
+                  onChange={handleOptionTypeChange}  className={styles.customRadio}
                 />
                 Text & Image URL
               </label>
@@ -592,6 +596,7 @@ const QuizOrPollType = ({
                       }
                       onChange={() => handleOptionCorrectChange(option.id)}
                       disabled={isEditMode}
+                      className={styles.customSelectedRadio}
                     />
                   )}
                   {currentQuestion.optionType === "text" && (

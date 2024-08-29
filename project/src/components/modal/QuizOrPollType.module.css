@@ -18,6 +18,7 @@
     padding: 20px;
     border-radius: 10px;
     width: 45vw;
+    min-width:450px;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -127,11 +128,13 @@
     display: flex;
     align-items: center;
     margin-bottom: 10px;
+    position: relative; 
   }
   .optionContainer label {
     display: flex;
     align-items: baseline;
     gap: 10px;
+   min-width:200px;
   }
   .inputField {
     width: 35%;
@@ -165,7 +168,7 @@
   .addOption {
     cursor: pointer;
     font-weight: 500;
-    margin-left: 30px;
+    margin-left: 22px;
     text-align: center;
     line-height: 35px;
     color: #9f9f9f;
@@ -199,13 +202,13 @@
   }
   
   .removeOptionTextImageURL {
-    margin-left: 15vw; 
-    margin-top: -5.5vh;
+    margin-left:210px; 
+    margin-top: -38px;
   }
   
   .inputField {
-    width: calc(100% - 20px); /* Adjust based on padding/margins */
-    max-width: 400px; /* Optional: Set a max width */
+    width: calc(100% - 20px); 
+    max-width: 400px;
   }
   
   .inputFieldText {
@@ -244,7 +247,7 @@
   
   .timerButton {
     width: 5.5vw;
-    height: 5vh;
+    /* height: 5vh; */
     border-radius: 5px;
     font-weight: 500;
     text-align: center;
@@ -253,7 +256,8 @@
     color: #9F9F9F;
     cursor: pointer;
     margin-bottom: 15px;
-    
+    min-width: 70px;
+    min-height: 20px;
   }
   
   .modalActions {
@@ -266,6 +270,7 @@
     border: none;
     cursor: pointer;
     width: 15vw;
+    min-width: 120px;
     font-weight: 600;
     font-size: 18px;
     line-height: 32px;
@@ -285,6 +290,7 @@
     line-height: 32px;
     height: 5vh;
     width: 15vw;
+    min-width: 120px;
   }
   
   .timerButton {
@@ -300,3 +306,44 @@
     color: white;
   }
   
+/* ____________________________________________________ */
+
+.customRadio {
+  appearance: none; 
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  background-color: #fff;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+
+.customRadio:checked {
+  background-color:#353434;
+}
+
+.customSelectedRadio{
+  appearance: none; 
+  width: 15px;
+  height: 15px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  background-color: #fff;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+.customSelectedRadio:checked {
+  background-color:#60B84B;
+}
+
+.activeQuestion span{
+  background-color: #60B84B; 
+  border-color: green;
+  color: white;
+}

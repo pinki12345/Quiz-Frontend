@@ -23,7 +23,10 @@ const QuizLinkShareModal = ({ quizLink, onClose }) => {
             X
           </button>
         </div>
-        <h2>Congrats! Your Quiz is Published!</h2>
+        <div className={styles.modalHeading}>
+        <p>Congrats! Your Quiz is </p>
+        <p>Published!</p>
+        </div>
         <input
           type="text"
           className={styles.linkInput}

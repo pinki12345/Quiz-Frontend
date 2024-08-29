@@ -71,12 +71,26 @@ const QuizAnalysis = () => {
     setQuizToDelete(null);
   };
 
+  // const handleShareClick = (quizId) => {
+  //   const url = `http://localhost:5173/quizInterface/${quizId}`;
+  //   navigator.clipboard
+  //     .writeText(url)
+  //     .then(() => alert("Link copied to clipboard!"))
+  //     .catch((error) => console.error("Error copying link:", error));
+  // };
+
   const handleShareClick = (quizId) => {
     const url = `http://localhost:5173/quizInterface/${quizId}`;
     navigator.clipboard
       .writeText(url)
-      .then(() => alert("Link copied to clipboard!"))
-      .catch((error) => console.error("Error copying link:", error));
+      .then(() => {
+        toast.success("Link copied to clipboard!",{
+          position: "top-right"});
+      })
+      .catch((error) => {
+        console.error("Error copying link:", error);
+        toast.error("Failed to copy link!"); 
+      });
   };
 
   const handleCancelEdit = () => {
@@ -137,7 +151,9 @@ const QuizAnalysis = () => {
                   <Link to={`quizQuestionAnalysis/${quiz._id}`} onClick={(e) => {
                         e.preventDefault();
                         onQuestionWiseAnalysisClick(quiz._id);
-                      }}>
+                      }}
+                      className={styles.linkUnderlined} 
+                      >
                     Question Wise Analysis
                   </Link>
                 </td>

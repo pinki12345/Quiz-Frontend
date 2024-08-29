@@ -106,7 +106,7 @@ const handleLogin = async () => {
       toast.success("Login successful!", {
         position: "top-right",
       });
-      navigate("/home");
+      navigate("/home/dashboard");
     } else {
       toast.error("Token not found in response headers.", {
         position: "top-right",

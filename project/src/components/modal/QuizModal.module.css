@@ -17,6 +17,7 @@
   padding: 20px;
   border-radius: 10px;
   width: 30vw;
+  min-width: 270px;
   text-align: center;
 }
 
@@ -28,13 +29,14 @@
   width: 90%;
   padding: 10px;
   margin-top: 15px;
+  margin-bottom: 15px;
   border-radius: 5px;
   border: none;
   box-shadow:  0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .quizType {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   padding-left: 10px;
   padding-right: 10px;
   display: flex;
@@ -58,6 +60,7 @@
 .qna,
 .poll {
     width: 8vw;
+    min-width: 70px;
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -84,6 +87,7 @@
   border: none;
   cursor: pointer;
   width: 12vw;
+  min-width: 120px;
   font-weight: 600;
   font-size: 18px;
   line-height: 32px;
@@ -97,6 +101,7 @@
 
 .continueButton {
   background-color: #4caf50;
+  min-width: 120px;
   border-radius: 5px;
   border: none;
   color: white;

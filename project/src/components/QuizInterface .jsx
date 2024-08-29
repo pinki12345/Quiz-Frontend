@@ -4,7 +4,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import styles from "./QuizInterface.module.css";
 import Loader from "./Loader";
 import { toast } from 'react-hot-toast';
-import { useDispatch } from 'react-redux';
+import { useDispatch,useSelector} from 'react-redux';
 import { setLoading } from "../actions";
 
 
@@ -17,6 +17,7 @@ const QuizInterface = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [responses, setResponses] = useState([]);
   const [timeLeft, setTimeLeft] = useState(0);
+  const isLoading = useSelector((state) => state.isLoading);
 
   useEffect(() => {
     const incrementImpression = async () => {
@@ -255,7 +256,7 @@ const QuizInterface = () => {
     }
   };
 
-  if (loading) return <Loader />;
+  if (isLoading) return <Loader />;
   // if (error) return <div>{error}</div>;
   if (!quiz || !quiz.questions || quiz.questions.length === 0) {
     return <div>No questions available.</div>;
@@ -266,7 +267,7 @@ const QuizInterface = () => {
       <div className={styles.quizContainer}>
         <div className={styles.quizHeader}>
           <div className={styles.quizProgress}>
-            {currentQuestionIndex + 1}/{quiz.questions.length}
+            0{currentQuestionIndex + 1}/0{quiz.questions.length}
           </div>
           {quiz.quizType === "Q&A" && currentQuestion.timeLimit > 0 && (
             <div className={styles.quizTimer}>{timeLeft} sec</div>
