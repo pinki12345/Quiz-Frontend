@@ -12,7 +12,7 @@ import QuizOrPollType from "./modal/QuizOrPollType";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
 
-const QuizAnalysis = () => {
+const QuizAnalysis = ({ onQuestionWiseAnalysisClick }) => {
   const dispatch = useDispatch();
   const quizzes = useSelector((state) => state.allQuizzes);
   const isLoading = useSelector((state) => state.isLoading);
@@ -21,6 +21,7 @@ const QuizAnalysis = () => {
   const [quizToDelete, setQuizToDelete] = useState(null);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [quizToEdit, setQuizToEdit] = useState(null);
+
 
   useEffect(() => {
     dispatch(fetchAllQuizzes());
@@ -133,7 +134,7 @@ const QuizAnalysis = () => {
                   />
                 </td>
                 <td>
-                  <Link to={`/home/quizQuestionAnalysis/${quiz._id}`}>
+                  <Link to={`quizQuestionAnalysis/${quiz._id}`} onClick={onQuestionWiseAnalysisClick}>
                     Question Wise Analysis
                   </Link>
                 </td>

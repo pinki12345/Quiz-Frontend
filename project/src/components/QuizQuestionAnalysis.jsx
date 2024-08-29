@@ -13,7 +13,7 @@ const QuizQuestionAnalysis = () => {
   const { quizId } = useParams();
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-
+  console.log("Quiz Question Analysis Id: " + quizId);
   useEffect(() => {
     const fetchQuizData = async () => {
       const toastId = toast.loading("Fetching quiz data...");
