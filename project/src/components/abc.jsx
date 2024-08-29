@@ -2896,3 +2896,208 @@
 // };
 
 // export default QuizAnalysis;
+
+//_______________________________________________Sidebar_______________________________________
+
+import React, { useState } from "react";
+import styles from "./Sidebar.module.css";
+import QuizModal from "./modal/QuizModal";
+import { toast } from "react-hot-toast";
+import QuizLinkShareModal from "./modal/QuizLinkShareModal";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import QuizOrPollType from "./modal/QuizOrPollType";
+
+const Sidebar = ({ onSidebarClick }) => {
+  const navigate = useNavigate();
+  const [modalStep, setModalStep] = useState(0);
+  const [selectedQuizType, setSelectedQuizType] = useState("");
+  const [quizName, setQuizName] = useState("");
+  const [quizLink, setQuizLink] = useState("");
+
+  const handleCreateQuizClick = () => {
+    setModalStep(1);
+  };
+
+  const handleCloseModal = () => {
+    setModalStep(0);
+  };
+
+  const handleNextModal = (quizType, quizName) => {
+    if (modalStep === 1) {
+      if (!quizName || !quizType) {
+        toast.error("Please provide all required fields");
+        return;
+      }
+      setSelectedQuizType(quizType);
+      setQuizName(quizName);
+      setModalStep(2);
+    } else if (modalStep === 2) {
+      if (!quizType) {
+        toast.error("Failed to create quiz");
+        return;
+      }
+      setQuizLink(quizType);
+      setModalStep(3);
+    }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
+
+  return (
+    <div className={styles.container}>
+      <aside className={styles.sidebarSide}>
+        <div className={styles.logo}>QUIZZIE</div>
+        <nav className={styles.nav}>
+          <ul>
+            {/* <li>
+              <Link to="/home/dashboard" className={styles.active}>
+                Dashboard
+              </Link>
+            </li>
+            <li>
+              <Link to="/home/quizAnalysis">Analytics</Link>
+            </li> */}
+
+            <li onClick={() => onSidebarClick("dashboard")}>Dashboard</li>
+            <li onClick={() => onSidebarClick("analytics")}>Analytics</li>
+
+            <li onClick={handleCreateQuizClick}>Create Quiz</li>
+          </ul>
+        </nav>
+        <div className={styles.logout}>
+          <div className={styles.logoutLine}></div>
+          <p onClick={handleLogout}>LOGOUT</p>
+        </div>
+      </aside>
+      {/* <div className={styles.content}>
+        <Outlet />
+      </div> */}
+      {modalStep === 1 && (
+        <QuizModal
+          onClose={handleCloseModal}
+          onNext={handleNextModal}
+          setQuizName={setQuizName}
+        />
+      )}
+      {modalStep === 2 && (
+        <QuizOrPollType
+          quizName={quizName}
+          quizType={selectedQuizType}
+          onClose={handleCloseModal}
+          onNext={handleNextModal}
+        />
+      )}
+      {modalStep === 3 && (
+        <QuizLinkShareModal quizLink={quizLink} onClose={handleCloseModal} />
+      )}
+    </div>
+  );
+};
+
+export default Sidebar;
+
+//_______________________________________________________________________________
+
+
+// .container {
+//     display: flex;
+//     height: 100vh;
+//     width: 100%;
+//     background-color: #f8f8f8;
+//     overflow-y: hidden;
+//     overflow-x: hidden;
+//     z-index: 1000;
+//     padding: 20px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//   }
+//   .sidebarSide {
+//     width:15%;
+   
+   
+//     padding: 20px;
+    
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: space-between;
+//     gap:5vh;
+//   }
+ 
+//   .logo {
+//     font-size: 40px;
+//     font-weight: 600;
+//     margin-bottom: 50px;
+//     text-align: center; 
+//     font-family: "Jomhuria", sans-serif;
+//   }
+//   .nav {
+//     flex-grow: 1; 
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+    
+//   }
+//   .nav ul {
+//     list-style: none;
+//     padding: 0;
+//     margin: 0;
+//   }
+//   .nav li {
+//     font-family: "Poppins", sans-serif;
+//     font-size: 20px;
+//     font-weight: 600;
+//     margin-bottom: 20px;
+//     cursor: pointer;
+//     text-align: center;
+    
+//   }
+//   .nav li.active {
+//     background-color: #f4f4f4;
+//     border-radius: 5px;
+//     padding: 10px;
+//   }
+//   .logout{
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+//   }
+//   .logoutLine{
+//     width: 124px;
+//     border: 1px solid #000000;
+//   }
+//   .logout p{
+//     font-weight: 700;
+//     margin: 0;
+//     padding-top: 15px;
+//     font-size: 20px;
+//     cursor: pointer;
+//     text-align: center;
+//     font-family: "Poppins", sans-serif;
+//   }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.css";
 import QuizModal from "./modal/QuizModal";
 import { toast } from "react-hot-toast";
 import QuizLinkShareModal from "./modal/QuizLinkShareModal";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import QuizOrPollType from "./modal/QuizOrPollType";
 
 const Sidebar = ({ onSidebarClick }) => {
@@ -47,9 +47,9 @@ const Sidebar = ({ onSidebarClick }) => {
 
   return (
     <div className={styles.container}>
-      <aside className={styles.sidebar}>
+      <div className={styles.sidebarSide}>
         <div className={styles.logo}>QUIZZIE</div>
-        <nav className={styles.nav}>
+        <nav className={styles.navbar}>
           <ul>
             {/* <li>
               <Link to="/home/dashboard" className={styles.active}>
@@ -62,7 +62,6 @@ const Sidebar = ({ onSidebarClick }) => {
 
             <li onClick={() => onSidebarClick("dashboard")}>Dashboard</li>
             <li onClick={() => onSidebarClick("analytics")}>Analytics</li>
-
             <li onClick={handleCreateQuizClick}>Create Quiz</li>
           </ul>
         </nav>
@@ -70,7 +69,7 @@ const Sidebar = ({ onSidebarClick }) => {
           <div className={styles.logoutLine}></div>
           <p onClick={handleLogout}>LOGOUT</p>
         </div>
-      </aside>
+      </div>
       {/* <div className={styles.content}>
         <Outlet />
       </div> */}
