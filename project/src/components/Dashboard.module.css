@@ -2,18 +2,16 @@
   display: flex;
   height: 100%;
   width: 100%;
+  min-width: 650px;
   background-color:#EDEDED;
-  /* background-color: #ff6700; */
-  /* overflow-y: hidden; */
+  overflow-y: hidden;
 }
 .mainContent {
   width: 15%;
   background-color: white;
-  /* padding: 20px; */
   border-right: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 }
 .logo {
   font-size: 40px;
@@ -139,38 +137,51 @@
 }
 
 .trendingQuizzes h2 {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   font-size: 24px;
+  
 }
 .quizList {
   display: flex;
   flex-wrap: wrap;
+  overflow-y: auto;
   gap: 3vw;
+  max-height: 350px;
 }
 .quizCard {
   background-color: #ffffff;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  width: 18vw;
-  height: 8vh;
+  width: 15vw;
+  min-width: 150px;
+  height: 13vh;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 .quizdetails {
   display: flex;
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
+  
+ 
 }
 .quizCard h4 {
   margin: 0 0 4px;
   font-size: 23px;
   font-weight: 600;
+  width: 10vw;
+  min-width: 70px;
   font-family: "Poppins", sans-serif;
+  
 }
 .quizCard p {
   margin: 5px 0;
+ 
   color: #60b84b;
   font-size: 11px;
   font-weight: 600;
@@ -192,4 +203,23 @@
   flex-direction: row;
   align-items: baseline;
   gap: 10px;
+}
+
+
+.quizList::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.quizList::-webkit-scrollbar-thumb {
+  background-color: #c5c5c5; 
+  border-radius: 6px; 
+}
+
+.quizList::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+.quizList::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+  border-radius: 6px; 
 }

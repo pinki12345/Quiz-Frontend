@@ -93,6 +93,7 @@ const QuizAnalysis = () => {
     <>
       <div className={styles.container}>
         <h2 className={styles.heading}>Quiz Analysis</h2>
+        <div className={styles.tableContainer}>
         <table className={styles.table}>
           <thead>
             <tr>
@@ -140,6 +141,7 @@ const QuizAnalysis = () => {
             ))}
           </tbody>
         </table>
+        </div>
         <div className={styles.moreQuizzes}>more quizzes can be added</div>
       </div>
       {isModalOpen && (

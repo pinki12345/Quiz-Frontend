@@ -82,7 +82,11 @@
   box-shadow:  0 0 8px rgba(0, 0, 0, 0.2); 
 }
 .logout {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+  justify-content: center;
+  margin-left: 20px;
 }
 .logoutLine {
   width: 124px;

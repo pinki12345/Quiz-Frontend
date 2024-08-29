@@ -3,7 +3,7 @@ import styles from "./Dashboard.module.css";
 import img from "../assets/Group.png";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllQuizzes,setLoading } from "../actions";
+import { fetchAllQuizzes, setLoading } from "../actions";
 import { formatDate } from "../utils/dateUtils";
 import Loader from "./Loader";
 import toast from "react-hot-toast";
@@ -27,27 +27,27 @@ const Dashboard = () => {
       } catch (error) {
         console.error("Error fetching stats:", error);
         toast.error("Failed to fetch stats");
-      }finally {
+      } finally {
         dispatch(setLoading(false));
       }
     };
     fetchStats();
   }, []);
- 
+
   useEffect(() => {
     dispatch(fetchAllQuizzes());
   }, [dispatch]);
 
-  if (isLoading) return <Loader/>;
+  if (isLoading) return <Loader />;
   if (error) return <div>{error}</div>;
-  
+
   return (
     <div className={styles.dashboard}>
       <main className={styles.mainContent}>
         <div className={styles.stats}>
           <div className={styles.statCard}>
             <div className={styles.statCardRed}>
-              <div className={styles.orangeText}>{stats.totalQuizzes}</div> 
+              <div className={styles.orangeText}>{stats.totalQuizzes}</div>
               <div className={styles.text}>Quiz Created</div>
             </div>
           </div>
@@ -61,7 +61,7 @@ const Dashboard = () => {
 
           <div className={styles.statCard}>
             <div className={styles.statCardBlue}>
-              <div className={styles.blueText}>{stats.totalImpressions}</div> 
+              <div className={styles.blueText}>{stats.totalImpressions}</div>
               <div className={styles.text}>Total Impressions</div>
             </div>
           </div>
@@ -75,12 +75,21 @@ const Dashboard = () => {
                 <div className={styles.quizdetails}>
                   <h4>{quiz.quizName}</h4>
                   <div className={styles.sideData}>
-                    <div className={styles.analyticsNumber}>{quiz.impressions}</div>
-                    <img src={img} className={styles.eyeIcon} alt="eye icon"></img>
+                    <div className={styles.analyticsNumber}>
+                      {quiz.impressions}
+                    </div>
+                    <img
+                      src={img}
+                      className={styles.eyeIcon}
+                      alt="eye icon"
+                    ></img>
                   </div>
                 </div>
-                <p> Created on:{" "}
-                {quiz.createdAt ? formatDate(quiz.createdAt) : "Loading..."}</p>
+                <p>
+                  {" "}
+                  Created on:{" "}
+                  {quiz.createdAt ? formatDate(quiz.createdAt) : "Loading..."}
+                </p>
               </div>
             ))}
           </div>
