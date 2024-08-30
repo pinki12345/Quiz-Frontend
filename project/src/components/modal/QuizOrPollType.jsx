@@ -4,7 +4,8 @@ import styles from "./QuizOrPollType.module.css";
 import deleteIcon from "../../assets/deleteIcon.png";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
-import { setLoading } from "../../actions";
+import { setLoading ,fetchAllQuizzes} from "../../actions";
+
 
 const QuizOrPollType = ({
   quizType,
@@ -260,50 +261,130 @@ const QuizOrPollType = ({
   //   setErrorMessage("");
   //   return true;
   // };
+//_______________________________________
+  // const validateQuizCreation = () => {
+  //   const allQuizzesCreated = questions.every((question) => {
+  //     // const optionsWithTextCount = question.options.filter(
+  //     //   (option) => option.text.trim()!== ""
+  //     // ).length;
+  //     const hasEmptyOption = question.options.some((option) => !option.text && !option.imageUrl);
+  //     if (isEditMode) {
+  //       return (
+  //         question.pollQuestion &&
+  //         question.options.every((option) => option.text)
+  //       );
+  //     } else {
+  //       // In non-edit mode, perform all validations
+  //       const hasCorrectOption =
+  //         quizType === "Q&A" ? question.correctOptionId !== null : true;
+  //       const hasValidTimeLimit =
+  //         quizType === "Q&A" ? [0, 5, 10].includes(question.timeLimit) : true;
 
-  const validateQuizCreation = () => {
-    const allQuizzesCreated = questions.every((question) => {
-      // const optionsWithTextCount = question.options.filter(
-      //   (option) => option.text.trim()!== ""
-      // ).length;
-      const hasEmptyOption = question.options.some((option) => !option.text && !option.imageUrl);
-      if (isEditMode) {
-        return (
-          question.pollQuestion &&
-          question.options.every((option) => option.text)
-        );
-      } else {
-        // In non-edit mode, perform all validations
-        const hasCorrectOption =
-          quizType === "Q&A" ? question.correctOptionId !== null : true;
-        const hasValidTimeLimit =
-          quizType === "Q&A" ? [0, 5, 10].includes(question.timeLimit) : true;
+  //       return (
+  //         question.pollQuestion &&
+  //         question.options.length >= 2 &&
+  //         // optionsWithTextCount >= 2 &&
+  //         !hasEmptyOption &&
+  //         hasCorrectOption &&
+  //         hasValidTimeLimit
+  //       );
+  //     }
+  //   });
+  //     console.log("allQuizzesCreated",allQuizzesCreated);
+  //   if (!allQuizzesCreated) {
+  //     const errorMessage = isEditMode
+  //       ? "Please ensure each question has text and each option has text."
+  //       : "Please complete each question, fill in two options, set a time limit (Q&A), and enter valid text or ImageURL.";
 
-        return (
-          question.pollQuestion &&
-          question.options.length >= 2 &&
-          // optionsWithTextCount >= 2 &&
-          !hasEmptyOption &&
-          hasCorrectOption &&
-          hasValidTimeLimit
-        );
+  //     // setErrorMessage(errorMessage);
+  //     toast.error(errorMessage);
+  //     return false;
+  //   }
+  //   toast.dismiss();
+  //   // setErrorMessage("");
+  //   return true;
+  // };
+//____________________________________________
+
+const validateQuizCreation = () => {
+  const allQuizzesCreated = questions.every((question) => {
+    // General validation for non-edit mode
+    // const hasEmptyOption = question.options.some(
+    //   (option) =>
+    //     question.optionType === "textImageURL" &&
+    //     (!option.text || !option.imageUrl) ||
+    //     question.optionType === "text" && !option.text ||
+    //     question.optionType === "imageURL" && !option.imageUrl
+    // );
+
+    
+  for (const question of questions) {
+    for (const option of question.options) {
+      if (question.optionType === "textImageURL") {
+        if (!option.text || !option.imageUrl) {
+          toast.error("Both text and image URL are required for 'Text & Image URL' option type.");
+          return false;
+        }
+      } else if (question.optionType === "text") {
+        if (!option.text) {
+          toast.error("Text is required for 'Text' option type.");
+          return false;
+        }
+      } else if (question.optionType === "imageURL") {
+        if (!option.imageUrl) {
+          toast.error("Image URL is required for 'Image URL' option type.");
+          return false;
+        }
       }
-    });
-      console.log("allQuizzesCreated",allQuizzesCreated);
-    if (!allQuizzesCreated) {
-      const errorMessage = isEditMode
-        ? "Please ensure each question has text and each option has text."
-        : "Please complete each question, fill in two options, set a time limit (Q&A), and enter valid text or ImageURL.";
-
-      // setErrorMessage(errorMessage);
-      toast.error(errorMessage);
-      return false;
     }
-    toast.dismiss();
-    // setErrorMessage("");
-    return true;
-  };
+  }
 
+
+    if (isEditMode) {
+      return (
+        question.pollQuestion &&
+        question.options.every((option) =>
+          question.optionType === "textImageURL"
+            ? option.text && option.imageUrl
+            : question.optionType === "text"
+            ? option.text
+            : question.optionType === "imageURL"
+            ? option.imageUrl
+            : true
+        )
+      );
+    } else {
+      // In non-edit mode, perform all validations
+      const hasCorrectOption =
+        quizType === "Q&A" ? question.correctOptionId !== null : true;
+      const hasValidTimeLimit =
+        quizType === "Q&A" ? [0, 5, 10].includes(question.timeLimit) : true;
+
+      return (
+        question.pollQuestion &&
+        question.options.length >= 2 &&
+        // !hasEmptyOption &&
+        hasCorrectOption &&
+        hasValidTimeLimit
+      );
+    }
+  });
+
+  console.log("allQuizzesCreated", allQuizzesCreated);
+
+  if (!allQuizzesCreated) {
+    const errorMessage = isEditMode
+      ? "Please ensure each question has text and each option has text."
+      : "Please complete each question, fill all the options, set a time limit (Q&A), and enter valid text or ImageURL.";
+
+    toast.error(errorMessage);
+    return false;
+  }
+  toast.dismiss();
+  return true;
+};
+
+//__________________________________________________________
   const handleCreateQuiz = async () => {
     if (!validateQuizCreation()) return;
     const quizData = questions.map((question) => {
@@ -340,6 +421,7 @@ const QuizOrPollType = ({
 
       console.log("Quiz created successfully:", response.data);
       toast.success("Quiz created successfully!", { id: toastId });
+      dispatch(fetchAllQuizzes());
       onNext(response.data.quizLink);
     } catch (error) {
       toast.error("Failed to create quiz", { id: toastId });
@@ -381,6 +463,7 @@ const QuizOrPollType = ({
       toast.success("Quiz updated successfully!", {
         position: "top-right",
       });
+      dispatch(fetchAllQuizzes());
       CloseEdit();
     } catch (error) {
       console.error(
@@ -620,9 +703,6 @@ const QuizOrPollType = ({
                       onChange={(e) =>
                         handleInputChange(option.id, "imageUrl", e.target.value)
                       }
-                      pattern="https://"
-                      title="Please enter a valid URL"
-                      required
                     />
                   )}
                   {currentQuestion.optionType === "textImageURL" && (

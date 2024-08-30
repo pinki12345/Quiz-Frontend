@@ -71,14 +71,6 @@ const QuizAnalysis = () => {
     setQuizToDelete(null);
   };
 
-  // const handleShareClick = (quizId) => {
-  //   const url = `http://localhost:5173/quizInterface/${quizId}`;
-  //   navigator.clipboard
-  //     .writeText(url)
-  //     .then(() => alert("Link copied to clipboard!"))
-  //     .catch((error) => console.error("Error copying link:", error));
-  // };
-
   const handleShareClick = (quizId) => {
     const url = `http://localhost:5173/quizInterface/${quizId}`;
     navigator.clipboard

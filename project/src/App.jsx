@@ -9,14 +9,17 @@ import Sidebar from "./components/Sidebar";
 import Error from "./pages/Error";
 import SignupLogin from "./pages/SignupLogin";
 import PrivateRoute from "./components/PrivateRoute";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route,Navigate} from "react-router-dom";
 import Home from "./pages/Home";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<SignupLogin />} />
+        {/* <Route path="/" element={<SignupLogin />} /> */}
+
+        <Route path="/" element={<Navigate to="/auth" />} />
+        <Route path="/auth" element={<SignupLogin />} />
         
         {/* <Route
           path="/home"

@@ -3,7 +3,7 @@ import {
     SET_ERROR,
     SET_TOKEN,
     SET_ALL_QUIZZES,
-    REMOVE_QUIZ
+    REMOVE_QUIZ,
   } from "../actions/index";
   
   const initialState = {

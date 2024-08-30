@@ -3,6 +3,7 @@ export const SET_ERROR = "SET_ERROR";
 export const SET_TOKEN = "SET_TOKEN";
 export const SET_ALL_QUIZZES = "SET_ALL_QUIZZES";
 export const REMOVE_QUIZ = "REMOVE_QUIZ";
+export const FETCH_ALL_QUIZZES_REQUEST = "FETCH_ALL_QUIZZES_REQUEST";
 
 export const setToken = (payload) => ({
   type: SET_TOKEN,
@@ -25,14 +26,18 @@ export const setQuizzes = (data) => ({
 });
 
 export const removeQuiz = (quizId) => ({
-    type: "REMOVE_QUIZ",
-    payload: quizId,
-  });
+  type: "REMOVE_QUIZ",
+  payload: quizId,
+});
 
-  
+export const fetchAllQuizzesRequest = () => ({
+  type: FETCH_ALL_QUIZZES_REQUEST,
+});
+
 export const fetchAllQuizzes = () => {
   return (dispatch) => {
-    dispatch(setLoading(true));
+    // dispatch(setLoading(true));
+    dispatch(fetchAllQuizzesRequest());
     fetch("http://localhost:3000/api/v1/getAllQuizzes")
       .then((response) => {
         if (!response.ok) {
@@ -42,14 +47,14 @@ export const fetchAllQuizzes = () => {
       })
       .then((data) => {
         dispatch(setQuizzes(data.quizzes));
-        dispatch(setError(null)); 
+        dispatch(setError(null));
       })
       .catch((error) => {
         console.error("Error fetching all quizzes data:", error);
         dispatch(setError("Error fetching all quizzes data"));
       })
       .finally(() => {
-        dispatch(setLoading(false)); 
+        dispatch(setLoading(false));
       });
   };
 };

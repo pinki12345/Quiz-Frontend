@@ -47,9 +47,6 @@
 import React from "react";
 import { useNavigate, Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
-// import Dashboard from "../components/Dashboard";
-// import QuizAnalysis from "../components/QuizAnalysis";
-// import QuizQuestionAnalysis from "../components/QuizQuestionAnalysis";
 import styles from "./Home.module.css";
 
 const Home = () => {

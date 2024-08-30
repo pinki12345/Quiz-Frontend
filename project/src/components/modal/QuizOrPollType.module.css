@@ -192,13 +192,15 @@
   }
   
   .removeOptionText {
-    margin-left: 8.5vw; 
-    margin-top: -5.5vh;
+    margin-left:120px; 
+    margin-top: -38px;
   }
   
   .removeOptionImageURL {
-    margin-left: 8.5vw;
-    margin-top: -5.5vh;
+    /* margin-left: 8.5vw;
+    margin-top: -5.5vh; */
+    margin-left:120px; 
+    margin-top: -38px;
   }
   
   .removeOptionTextImageURL {
