@@ -266,6 +266,7 @@ const QuizOrPollType = ({
       // const optionsWithTextCount = question.options.filter(
       //   (option) => option.text.trim()!== ""
       // ).length;
+      const hasEmptyOption = question.options.some((option) => !option.text && !option.imageUrl);
       if (isEditMode) {
         return (
           question.pollQuestion &&
@@ -282,6 +283,7 @@ const QuizOrPollType = ({
           question.pollQuestion &&
           question.options.length >= 2 &&
           // optionsWithTextCount >= 2 &&
+          !hasEmptyOption &&
           hasCorrectOption &&
           hasValidTimeLimit
         );
@@ -291,7 +293,7 @@ const QuizOrPollType = ({
     if (!allQuizzesCreated) {
       const errorMessage = isEditMode
         ? "Please ensure each question has text and each option has text."
-        : "Please create a quiz for each question, ensure at least two options have text, select a correct option (for Q&A), and choose a valid time limit (for Q&A) before proceeding.";
+        : "Please complete each question, fill in two options, set a time limit (Q&A), and enter valid text or ImageURL.";
 
       // setErrorMessage(errorMessage);
       toast.error(errorMessage);
@@ -618,6 +620,9 @@ const QuizOrPollType = ({
                       onChange={(e) =>
                         handleInputChange(option.id, "imageUrl", e.target.value)
                       }
+                      pattern="https://"
+                      title="Please enter a valid URL"
+                      required
                     />
                   )}
                   {currentQuestion.optionType === "textImageURL" && (
