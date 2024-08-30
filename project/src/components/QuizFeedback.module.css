@@ -30,7 +30,6 @@
   color: #474444;
   text-align: center;
 }
-
 .quizCup {
   width: 15vw;
   height: 30vh;
@@ -43,4 +42,41 @@
 }
 .quizScore{
     color: #60B84B;
+}
+
+@media (max-width: 768px) {
+  .quizContainerbody {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+  .quizContainer {
+    width: 100vw;
+    height:100vh;
+    padding: 20px;
+    border-radius:0px;
+    gap:30px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+  }
+  .quizHeader {
+    font-size: 35px; 
+    line-height: 45px;
+    text-align: center; 
+  }
+  .quizCup {
+    width: 80%; 
+    min-width: 150px; 
+    max-height: 100%;
+  }
+  .quizResult {
+    font-size: 30px;
+    text-align: center; 
+  }
+  .quizScore {
+    font-size: 30px; 
+    text-align: center; 
+    margin-top: 5px; 
+  }
 }

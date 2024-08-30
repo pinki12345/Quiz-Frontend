@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 
 
 const QuizFeedback = () => {
-
+  
   const location = useLocation();
   const { score, totalQuestions } = location.state || { score: 0, totalQuestions: 0 };
   const formattedScore = `${score.toString().padStart(2, '0')}/${totalQuestions.toString().padStart(2, '0')}`;
@@ -20,6 +20,7 @@ const QuizFeedback = () => {
     </div>
   );
 };
+
 
 export default QuizFeedback;
 

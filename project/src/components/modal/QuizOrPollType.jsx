@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "./QuizOrPollType.module.css";
 import deleteIcon from "../../assets/deleteIcon.png";
 import toast from "react-hot-toast";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { setLoading } from "../../actions";
 
 const QuizOrPollType = ({
@@ -89,8 +89,7 @@ const QuizOrPollType = ({
               : question.options[0]?.type === "Image URL"
               ? "imageURL"
               : "text",
-          correctOptionId:
-            quiz.quizType === "Q&A"? correctOptionIndex: null,
+          correctOptionId: quiz.quizType === "Q&A" ? correctOptionIndex : null,
           ...(quizType === "Q&A" && { timeLimit: timeLimit }),
         };
       });
@@ -264,6 +263,9 @@ const QuizOrPollType = ({
 
   const validateQuizCreation = () => {
     const allQuizzesCreated = questions.every((question) => {
+      // const optionsWithTextCount = question.options.filter(
+      //   (option) => option.text.trim()!== ""
+      // ).length;
       if (isEditMode) {
         return (
           question.pollQuestion &&
@@ -275,21 +277,22 @@ const QuizOrPollType = ({
           quizType === "Q&A" ? question.correctOptionId !== null : true;
         const hasValidTimeLimit =
           quizType === "Q&A" ? [0, 5, 10].includes(question.timeLimit) : true;
-  
+
         return (
           question.pollQuestion &&
           question.options.length >= 2 &&
+          // optionsWithTextCount >= 2 &&
           hasCorrectOption &&
           hasValidTimeLimit
         );
       }
     });
-  
+      console.log("allQuizzesCreated",allQuizzesCreated);
     if (!allQuizzesCreated) {
       const errorMessage = isEditMode
         ? "Please ensure each question has text and each option has text."
-        : "Please create a quiz for each question, select a correct option (for Q&A), and choose a valid time limit (for Q&A) before proceeding.";
-  
+        : "Please create a quiz for each question, ensure at least two options have text, select a correct option (for Q&A), and choose a valid time limit (for Q&A) before proceeding.";
+
       // setErrorMessage(errorMessage);
       toast.error(errorMessage);
       return false;
@@ -301,7 +304,6 @@ const QuizOrPollType = ({
 
   const handleCreateQuiz = async () => {
     if (!validateQuizCreation()) return;
-
     const quizData = questions.map((question) => {
       const preparedOptions = question.options.map((option) => ({
         type:
@@ -321,6 +323,7 @@ const QuizOrPollType = ({
         ...(quizType === "Q&A" && { timeLimit: question.timeLimit }), // Corrected to "Q&A"
       };
     });
+    console.log("Create quiz_____",quizData)
     const toastId = toast.loading("Creating quiz...");
     dispatch(setLoading(true));
     try {
@@ -342,8 +345,7 @@ const QuizOrPollType = ({
         "Failed to create quiz:",
         error.response ? error.response.data : error.message
       );
-    }
-    finally {
+    } finally {
       toast.dismiss(toastId);
       dispatch(setLoading(false));
     }
@@ -363,10 +365,7 @@ const QuizOrPollType = ({
               : "Text",
           text: option.text || "",
           imageUrl: option.imageUrl || "",
-          isCorrect:
-            quizType === "Poll"
-              ? false
-              : option.isCorrect,
+          isCorrect: quizType === "Poll" ? false : option.isCorrect,
         })),
       };
     });
@@ -377,22 +376,20 @@ const QuizOrPollType = ({
         `http://localhost:3000/api/v1/updateQuizOrPoll/${quiz._id}`,
         { questions: quizData }
       );
-      toast.success("Quiz updated successfully!",{
-        position: "top-right"});
+      toast.success("Quiz updated successfully!", {
+        position: "top-right",
+      });
       CloseEdit();
-
     } catch (error) {
       console.error(
         "Failed to update quiz:",
         error.response ? error.response.data : error.message
       );
-    }
-    finally {
+    } finally {
       toast.dismiss(toastId);
       dispatch(setLoading(false));
     }
   };
-
 
   return (
     <div className={styles.modalOverlay}>
@@ -562,7 +559,8 @@ const QuizOrPollType = ({
                   type="radio"
                   value="imageURL"
                   checked={currentQuestion.optionType === "imageURL"}
-                  onChange={handleOptionTypeChange} className={styles.customRadio}
+                  onChange={handleOptionTypeChange}
+                  className={styles.customRadio}
                 />
                 Image URL
               </label>
@@ -571,7 +569,8 @@ const QuizOrPollType = ({
                   type="radio"
                   value="textImageURL"
                   checked={currentQuestion.optionType === "textImageURL"}
-                  onChange={handleOptionTypeChange}  className={styles.customRadio}
+                  onChange={handleOptionTypeChange}
+                  className={styles.customRadio}
                 />
                 Text & Image URL
               </label>

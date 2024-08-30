@@ -18,6 +18,7 @@ const QuizInterface = () => {
   const [timeLeft, setTimeLeft] = useState(0);
   const isLoading = useSelector((state) => state.isLoading);
 
+  console.log("Quiz text", quiz);
   useEffect(() => {
     const incrementImpression = async () => {
       dispatch(setLoading(true));
@@ -65,18 +66,6 @@ const QuizInterface = () => {
     fetchQuiz();
   }, [id]);
 
-  // useEffect(() => {
-  //   if (quiz?.quizType === "Q&A" && timeLeft > 0) {
-  //     const timer = setTimeout(
-  //       () => setTimeLeft((prevTime) => prevTime - 1),
-  //       1000
-  //     );
-  //     return () => clearTimeout(timer);
-  //   } else if (timeLeft === 0) {
-  //     handleNextQuestion();
-  //   }
-  // }, [timeLeft, quiz]);
-
   useEffect(() => {
     if (quiz?.quizType === "Q&A" && timeLeft > 0) {
       const timer = setTimeout(
@@ -96,50 +85,25 @@ const QuizInterface = () => {
     }
   }, [currentQuestionIndex, quiz]);
 
-  // const handleOptionClick = (optionIndex) => {
-  //   if (quiz) {
-  //     setSelectedOption(optionIndex);
-  //     const currentQuestionId = quiz.questions[currentQuestionIndex]._id;
-
-  //     if (quiz.quizType === "Q&A") {
-  //       const isCorrect =
-  //         quiz.questions[currentQuestionIndex].options[optionIndex].isCorrect;
-  //       const updatedResponses = [...responses];
-  //       updatedResponses[currentQuestionIndex] = {
-  //         questionId: currentQuestionId,
-  //         isCorrect: isCorrect,
-  //       };
-  //       setResponses(updatedResponses);
-  //     } else if (quiz.quizType === "Poll") {
-  //       const selectedOptionId =
-  //         quiz.questions[currentQuestionIndex].options[optionIndex]._id;
-  //       const updatedResponses = [...responses];
-  //       updatedResponses[currentQuestionIndex] = {
-  //         questionId: currentQuestionId,
-  //         selectedOptionId: selectedOptionId,
-  //       };
-  //       setResponses(updatedResponses);
-  //     }
-  //   }
-  // };
-
   const handleOptionClick = (optionIndex) => {
     if (quiz) {
       // Determine the current question ID
       const currentQuestionId = quiz.questions[currentQuestionIndex]._id;
-      
+
       // Check if the clicked option is already selected
       if (selectedOption === optionIndex) {
         // If the same option is clicked, unselect it
         setSelectedOption(null);
-  
+
         // Remove the response for this question
-        const updatedResponses = responses.filter(response => response.questionId !== currentQuestionId);
+        const updatedResponses = responses.filter(
+          (response) => response.questionId !== currentQuestionId
+        );
         setResponses(updatedResponses);
       } else {
         // Select the new option
         setSelectedOption(optionIndex);
-  
+
         const updatedResponses = [...responses];
         if (quiz.quizType === "Q&A") {
           const isCorrect =
@@ -160,7 +124,6 @@ const QuizInterface = () => {
       }
     }
   };
-  
 
   useEffect(() => {
     if (quiz) {
@@ -172,44 +135,6 @@ const QuizInterface = () => {
       }
     }
   }, [quiz]);
-
-  // const handleNextQuestion = () => {
-  //   if (!quiz) return;
-  //   const updatedResponses = [...responses];
-  //   const currentQuestionId = quiz.questions[currentQuestionIndex]._id;
-  //   if (selectedOption !== null) {
-  //     if (quiz.quizType === "Q&A") {
-  //       const isCorrect =
-  //         quiz.questions[currentQuestionIndex].options[selectedOption]
-  //           .isCorrect;
-  //       updatedResponses[currentQuestionIndex] = {
-  //         questionId: currentQuestionId,
-  //         isCorrect: isCorrect,
-  //       };
-  //     } else if (quiz.quizType === "Poll") {
-  //       const selectedOptionId =
-  //         quiz.questions[currentQuestionIndex].options[selectedOption]._id;
-  //       updatedResponses[currentQuestionIndex] = {
-  //         questionId: currentQuestionId,
-  //         selectedOptionId: selectedOptionId,
-  //       };
-  //     }
-  //   } else {
-  //     updatedResponses[currentQuestionIndex] = null;
-  //   }
-  //   setResponses(updatedResponses);
-  //   if (currentQuestionIndex < quiz.questions.length - 1) {
-  //     const nextQuestionIndex = currentQuestionIndex + 1;
-  //     setCurrentQuestionIndex(nextQuestionIndex);
-  //     setSelectedOption(null);
-  //     if (quiz.quizType === "Q&A") {
-  //       const newTimeLimit = quiz.questions[nextQuestionIndex].timeLimit || 0;
-  //       setTimeLeft(newTimeLimit);
-  //     }
-  //   } else {
-  //     handleSubmitQuiz();
-  //   }
-  // };
 
   const handleNextQuestion = () => {
     if (!quiz) return;
@@ -308,6 +233,29 @@ const QuizInterface = () => {
             <div className={styles.quizTimer}>{timeLeft} sec</div>
           )}
         </div>
+        {/* _____________________________________________________ */}
+        {/* <div className={styles.quizQuestions}>
+          <div key={currentQuestion._id} className={styles.quizQuestion}>
+            <p>{currentQuestion.questionText}</p>
+            <div className={styles.quizOptions}>
+              {currentQuestion.options.map((option, optionIndex) => (
+                <button
+                  key={option._id}
+                  className={`${styles.quizOption} ${
+                    selectedOption === optionIndex
+                      ? styles.quizOptionSelected
+                      : ""
+                  }`}
+                  onClick={() => handleOptionClick(optionIndex)}
+                >
+
+                  {option.text}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div> */}
+
         <div className={styles.quizQuestions}>
           <div key={currentQuestion._id} className={styles.quizQuestion}>
             <p>{currentQuestion.questionText}</p>
@@ -322,12 +270,33 @@ const QuizInterface = () => {
                   }`}
                   onClick={() => handleOptionClick(optionIndex)}
                 >
-                  {option.text}
+                  {option.type === "Text" && (
+                    <div className={styles.optionText}>{option.text}</div>
+                  )}
+                  {option.type === "Image URL" && (
+                    <img
+                      src={option.imageUrl}
+                      alt={`Option ${optionIndex + 1}`}
+                      className={styles.quizOptionOnlyImage}
+                    />
+                  )}
+                  {option.type === "Text & Image URL" && (
+                    <>
+                      <div className={styles.quizOptionText}>{option.text}</div>
+                      <img
+                        src={option.imageUrl}
+                        alt={`Option ${optionIndex + 1}`}
+                        className={styles.quizOptionImage}
+                      />
+                    </>
+                  )}
                 </button>
               ))}
             </div>
           </div>
         </div>
+
+        {/* _____________________________________________________________ */}
         <button className={styles.quizNextButton} onClick={handleNextQuestion}>
           {currentQuestionIndex < quiz.questions.length - 1 ? "NEXT" : "SUBMIT"}
         </button>
